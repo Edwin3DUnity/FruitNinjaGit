@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Target : MonoBehaviour
@@ -9,7 +10,7 @@ public class Target : MonoBehaviour
     private Rigidbody _rigidbody;
 
     
-    private float minForce = 12, maxForce = 16;
+    private float minForce = 13, maxForce = 16;
 
     
     private float maxTorque = 10;
@@ -24,7 +25,7 @@ public class Target : MonoBehaviour
     private GameManager _gameManager;
 
 
-    public int damage;
+    [FormerlySerializedAs("poinyValue")] [FormerlySerializedAs("damage")] public int pointValue;
     
     // Start is called before the first frame update
     void Start()
@@ -77,7 +78,7 @@ public class Target : MonoBehaviour
     private void OnMouseOver()
     {
         Destroy(gameObject);
-        _gameManager.UpdateScore(damage);
+        _gameManager.UpdateScore(pointValue);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -85,6 +86,11 @@ public class Target : MonoBehaviour
         if (other.CompareTag("KillZone"))
         {
             Destroy(gameObject);
+            if (pointValue > 0)
+            {
+                _gameManager.UpdateScore(pointValue = -50);
+            }
+            
         }
     }
 }

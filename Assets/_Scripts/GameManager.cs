@@ -12,7 +12,27 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI scoreText;
 
-    private int score;
+    private int _score;
+
+    private  int score
+    {
+        set
+        {
+          /*  _score = value;
+            if (_score < 0)
+            {
+                _score = 0;
+            }*/
+
+          _score = Mathf.Max(value, 0);
+
+        }
+
+        get
+        {
+            return _score;
+        }
+    }
     
     // Start is called before the first frame update
     void Start()
