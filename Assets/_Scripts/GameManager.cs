@@ -5,7 +5,16 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public enum GameState
+    {
+        loading, 
+        paused,
+        inGame, 
+        gameOver
+    }
 
+    public GameState gameState;
+    
     public List<GameObject> targetPrefabs;
 
     public float spawnRate = 1;
@@ -40,10 +49,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameState = GameState.inGame;
         StartCoroutine(SpawnTarget());
+        
         score = 0;
         UpdateScore(0);
         gameOverText.gameObject.SetActive(false);
+        
+        
     }
 
     // Update is called once per frame
@@ -54,15 +67,27 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpawnTarget()
     {
-        while (true)
+        
+       /* while (true)
         {
             yield return new WaitForSeconds(spawnRate);
             int index = Random.Range(0, targetPrefabs.Count);
             Instantiate(targetPrefabs[index]);
             
+            
 
+        }*/
+       
+        
+       while (gameState == GameState.inGame)
+       {
+           yield return new WaitForSeconds(spawnRate);
+           int index = Random.Range(0, targetPrefabs.Count);
+           Instantiate(targetPrefabs[index]);
+            
+            
 
-        } 
+       } 
     }
     /// <summary>
     /// Actualiza la puntuación y lo muestra por pantalla
@@ -78,7 +103,9 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        gameState = GameState.gameOver;
         gameOverText.gameObject.SetActive(true);
+        
     }
     
 }

@@ -81,10 +81,13 @@ public class Target : MonoBehaviour
 
     private void OnMouseOver()
     {
+        if (_gameManager.gameState == GameManager.GameState.inGame)
+        {
+            Destroy(gameObject);
+            Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+            _gameManager.UpdateScore(pointValue);  
+        }
         
-        Destroy(gameObject);
-        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
-        _gameManager.UpdateScore(pointValue);
 
        /* if (gameObject.CompareTag("Bad"))
         {
