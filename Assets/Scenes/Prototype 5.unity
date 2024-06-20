@@ -540,6 +540,7 @@ MonoBehaviour:
   - {fileID: 1172853567109416377, guid: d35d138dd3c48d646a994dbfc7e6ba30, type: 3}
   - {fileID: 1172853567109416377, guid: d35d138dd3c48d646a994dbfc7e6ba30, type: 3}
   spawnRate: 1
+  scoreText: {fileID: 1156059383}
 --- !u!4 &700979316
 Transform:
   m_ObjectHideFlags: 0

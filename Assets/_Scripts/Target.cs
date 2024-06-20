@@ -19,6 +19,12 @@ public class Target : MonoBehaviour
 
     
     private float posY = -6;
+
+
+    private GameManager _gameManager;
+
+
+    public int damage;
     
     // Start is called before the first frame update
     void Start()
@@ -28,6 +34,8 @@ public class Target : MonoBehaviour
         _rigidbody.AddTorque(RandomTorque(), RandomTorque(), RandomTorque(), ForceMode.Impulse);
 
         transform.position = RandomSpawnPos() ;
+
+        _gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -69,6 +77,7 @@ public class Target : MonoBehaviour
     private void OnMouseOver()
     {
         Destroy(gameObject);
+        _gameManager.UpdateScore(damage);
     }
 
     private void OnTriggerEnter(Collider other)
