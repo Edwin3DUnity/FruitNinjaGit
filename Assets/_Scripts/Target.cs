@@ -85,7 +85,13 @@ public class Target : MonoBehaviour
         Destroy(gameObject);
         Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
         _gameManager.UpdateScore(pointValue);
+
+       /* if (gameObject.CompareTag("Bad"))
+        {
+            _gameManager.GameOver();
+        }*/
         
+       
     }
 
     private void OnTriggerEnter(Collider other)
@@ -93,9 +99,15 @@ public class Target : MonoBehaviour
         if (other.CompareTag("KillZone"))
         {
             Destroy(gameObject);
-            if (pointValue > 0)
+
+           /* if (pointValue > 0)
             {
-                _gameManager.UpdateScore(pointValue = -50);
+                _gameManager.UpdateScore(-10);
+            }*/
+            
+            if (gameObject.CompareTag("Good"))
+            {
+                _gameManager.GameOver();
             }
             
         }

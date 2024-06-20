@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
             return _score;
         }
     }
+
+
+    public TextMeshProUGUI gameOverText;
     
     // Start is called before the first frame update
     void Start()
@@ -40,6 +43,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SpawnTarget());
         score = 0;
         UpdateScore(0);
+        gameOverText.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -70,6 +74,11 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score  \n " + score;
 
 
+    }
+
+    public void GameOver()
+    {
+        gameOverText.gameObject.SetActive(true);
     }
     
 }
