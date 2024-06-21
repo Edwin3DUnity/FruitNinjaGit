@@ -48,16 +48,18 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI gameOverText;
     public Button restarButton;
+
+    public GameObject titleScreen;
     
     // Start is called before the first frame update
     void Start()
     {
-        gameState = GameState.inGame;
+       /* gameState = GameState.inGame;
         StartCoroutine(SpawnTarget());
         
         score = 0;
         UpdateScore(0);
-        gameOverText.gameObject.SetActive(false);
+        gameOverText.gameObject.SetActive(false);*/
         
         //restarButton.onClick.AddListener(RestartGame);
     }
@@ -114,5 +116,20 @@ public class GameManager : MonoBehaviour
    public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }    
+    }
+/// <summary>
+/// Método que inicia la partida cambiando el valor del estado del juego
+/// </summary>
+    public void StartGame()
+    {
+        
+        gameState = GameState.inGame;
+        titleScreen.gameObject.SetActive(false);
+        StartCoroutine(SpawnTarget());
+        
+        score = 0;
+        UpdateScore(0);
+        gameOverText.gameObject.SetActive(false); 
+    }
+   
 }
