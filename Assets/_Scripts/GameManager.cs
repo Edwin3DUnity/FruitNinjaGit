@@ -54,6 +54,12 @@ public class GameManager : MonoBehaviour
 
 
     private const string MAX_SCORE = "MAX_SCORE";
+
+
+
+    private int numberOfLives = 4;
+    public List<GameObject> lives;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -129,11 +135,27 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
 
-        SetMaxScore();
+        numberOfLives--;
+        if (numberOfLives >= 0)
+        {
+            Image heartImage = lives[numberOfLives].GetComponent<Image>();
+            var tempColor = heartImage.color;
+            tempColor.a = 0.3f;
+            heartImage.color = tempColor;
+        }
         
-        gameState = GameState.gameOver;
-        gameOverText.gameObject.SetActive(true);
-        restarButton.gameObject.SetActive(true);
+        
+        
+        if (numberOfLives <= 0)
+        {
+            SetMaxScore();
+        
+            gameState = GameState.gameOver;
+            gameOverText.gameObject.SetActive(true);
+            restarButton.gameObject.SetActive(true);
+        }
+        
+        
     }
 
     
@@ -152,6 +174,19 @@ public class GameManager : MonoBehaviour
         titleScreen.gameObject.SetActive(false);
 
         spawnRate /= difficulty;
+        numberOfLives -= difficulty ;
+
+      /*  for (int i = numberOfLives ; i < lives.Count; i++)
+        {
+            lives[i].SetActive(false);
+            
+        }*/
+
+      for (int i = 0; i < numberOfLives; i++)
+      {
+          lives[i].SetActive(true);
+      }
+      
         
         StartCoroutine(SpawnTarget());
         
