@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -52,7 +53,7 @@ public class GameManager : MonoBehaviour
     public GameObject titleScreen;
 
 
-    
+    private const string MAX_SCORE = "MAX_SCORE";
     
     // Start is called before the first frame update
     void Start()
@@ -65,6 +66,8 @@ public class GameManager : MonoBehaviour
         gameOverText.gameObject.SetActive(false);*/
         
         //restarButton.onClick.AddListener(RestartGame);
+        
+        ShowMaxScore();
     }
 
     // Update is called once per frame
@@ -109,13 +112,31 @@ public class GameManager : MonoBehaviour
 
     }
 
+
+    private void SetMaxScore()
+    {
+        int maxScore = PlayerPrefs.GetInt(MAX_SCORE, 0);
+        if(score > maxScore)
+        {
+            PlayerPrefs.SetInt(MAX_SCORE, score);
+            
+        }
+        
+        
+    }
+  
+
     public void GameOver()
     {
+
+        SetMaxScore();
+        
         gameState = GameState.gameOver;
         gameOverText.gameObject.SetActive(true);
         restarButton.gameObject.SetActive(true);
     }
 
+    
    public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -139,4 +160,10 @@ public class GameManager : MonoBehaviour
         gameOverText.gameObject.SetActive(false); 
     }
    
+    public void ShowMaxScore()
+    {
+        int maxCore = PlayerPrefs.GetInt(MAX_SCORE, 0);
+        scoreText.text = "Max Score: \n" + maxCore;
+    }
+
 }
