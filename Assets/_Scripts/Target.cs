@@ -10,7 +10,7 @@ public class Target : MonoBehaviour
     private Rigidbody _rigidbody;
 
     
-    private float minForce = 13, maxForce = 16;
+  [SerializeField]  private float minForce = 16, maxForce = 18;
 
     
     private float maxTorque = 10;

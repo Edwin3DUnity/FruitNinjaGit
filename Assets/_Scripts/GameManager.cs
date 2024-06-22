@@ -50,6 +50,9 @@ public class GameManager : MonoBehaviour
     public Button restarButton;
 
     public GameObject titleScreen;
+
+
+    
     
     // Start is called before the first frame update
     void Start()
@@ -120,11 +123,15 @@ public class GameManager : MonoBehaviour
 /// <summary>
 /// Método que inicia la partida cambiando el valor del estado del juego
 /// </summary>
-    public void StartGame()
+/// <param name="difficulty">Número entero que indica el grado de dificultad del juego</param>
+    public void StartGame(int difficulty)
     {
         
         gameState = GameState.inGame;
         titleScreen.gameObject.SetActive(false);
+
+        spawnRate /= difficulty;
+        
         StartCoroutine(SpawnTarget());
         
         score = 0;
