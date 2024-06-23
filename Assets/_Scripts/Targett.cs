@@ -101,6 +101,7 @@ public class Targett : MonoBehaviour
             Destroy(gameObject);
             Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
             
+            
         }
         
     }

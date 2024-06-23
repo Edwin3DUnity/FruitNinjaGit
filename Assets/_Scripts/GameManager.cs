@@ -63,8 +63,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameState = GameState.inGame;
-        StartCoroutine("SpawnTarget");
+        ShowMaxScore();
 
     }
 
@@ -79,7 +78,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpawnTarget()
     {
-        while (true)
+        while (gameState == GameState.inGame)
         {
             yield return new WaitForSeconds(spawnRate);
             int index = Random.Range(0, targetPrefabs.Count);
@@ -90,8 +89,86 @@ public class GameManager : MonoBehaviour
     }
 
 
+  
+
+
+    public void UpdateScore(int scoreTodAdd)
+    {
+        score += scoreTodAdd;
+        scoreText.text = "Score \n" + score;
+
+    }
+
+
+    private void SetMaxScore()
+    {
+        int maxScore = PlayerPrefs.GetInt(MAX_SCORE, 0);
+
+        if (score > maxScore)
+        {
+            PlayerPrefs.SetInt(MAX_SCORE, score);
+        }
+    }
+
+
+    public void GameOver()
+    {
+        numberOfLives--;
+        if (numberOfLives >= 0)
+        {
+            Image heartImage = lives[numberOfLives].GetComponent<Image>();
+            var tempColor = heartImage.color;
+            tempColor.a = 0.3f;
+            heartImage.color = tempColor;
+
+        }
+
+        if (numberOfLives <= 0)
+        {
+            SetMaxScore();
+
+            gameState = GameState.gameOver;
+            gameOverText.gameObject.SetActive(true);
+            restarButton.gameObject.SetActive(true);
+        }
+
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+
     public void StartGame(int difficulty)
     {
         gameState = GameState.inGame;
+        titleScreen.gameObject.SetActive(false);
+
+        spawnRate /= difficulty;
+        numberOfLives -= difficulty;
+
+
+        for (int i = 0; i < numberOfLives; i++)
+        {
+            lives[i].SetActive(true);
+           
+        }
+
+
+        StartCoroutine(SpawnTarget());
+
+        score = 0;
+        UpdateScore(0);
+        gameOverText.gameObject.SetActive(false);
+
     }
+
+
+    public void ShowMaxScore()
+    {
+        int maxScore = PlayerPrefs.GetInt(MAX_SCORE, 0);
+        scoreText.text = "Max Score: \n" + maxScore;
+    }
+    
 }
