@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - KillZone
   - Good
   - Bad
+  - KillZone
   layers:
   - Default
   - TransparentFX
