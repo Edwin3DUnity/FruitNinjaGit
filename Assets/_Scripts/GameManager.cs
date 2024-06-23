@@ -88,5 +88,10 @@ public class GameManager : MonoBehaviour
         
         
     }
-    
+
+
+    public void StartGame(int difficulty)
+    {
+        gameState = GameState.inGame;
+    }
 }

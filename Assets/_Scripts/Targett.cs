@@ -88,6 +88,7 @@ public class Targett : MonoBehaviour
 
         if (gameObject.CompareTag("Good"))
         {
+            
         }
     }
 
