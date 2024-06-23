@@ -88,6 +88,7 @@ public class Targett : MonoBehaviour
 
         if (gameObject.CompareTag("Good"))
         {
+            _gameManager.GameOver();
             
         }
     }
@@ -100,6 +101,7 @@ public class Targett : MonoBehaviour
             Debug.Log("momento de colision con el objeto");
             Destroy(gameObject);
             Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+            _gameManager.UpdateScore(pointValue);
             
             
         }
