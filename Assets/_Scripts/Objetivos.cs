@@ -15,9 +15,9 @@ public class Objetivos : MonoBehaviour
     [SerializeField] private float torqueRotation = 10;
 
     private float posX = 4;
-    [SerializeField, Range(-10 , 0)] private float posY = -4;
+     private float posY = -4;
 
-    //private GameManager _gameManagr;
+    private GameManager _gameManagr;
     public int pointValue;
 
     public ParticleSystem explosionParticle;
@@ -29,7 +29,11 @@ public class Objetivos : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.AddForce(RandomForce(), ForceMode.Impulse);
         _rigidbody.AddTorque(RandomTorque(),RandomTorque(), RandomTorque(), ForceMode.Impulse);
-        
+
+        transform.position = posRandom();
+
+        _gameManagr = FindObjectOfType<GameManager>();
+
     }
 
     // Update is called once per frame
@@ -72,6 +76,7 @@ public class Objetivos : MonoBehaviour
     {
         Destroy(gameObject);
         Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+        _gameManagr.UpdateScore(pointValue);
     }
 
 
@@ -82,6 +87,11 @@ public class Objetivos : MonoBehaviour
             Destroy(gameObject);
             
             
+        }
+
+        if (gameObject.CompareTag("Good"))
+        {
+            _gameManagr.GameOver();
         }
     }
 }

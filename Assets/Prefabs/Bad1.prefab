@@ -270,6 +270,6 @@ MonoBehaviour:
   minForce: 16
   maxForce: 18
   torqueRotation: 10
-  posY: -4
+  posY: -7.98
   pointValue: -30
   explosionParticle: {fileID: 3199346384015752365, guid: 307229a5540374aae98859caad2128a3, type: 3}
