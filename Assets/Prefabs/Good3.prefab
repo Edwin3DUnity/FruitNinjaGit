@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6923172442950562797}
   - component: {fileID: 4668692919257738397}
   - component: {fileID: 2599377431685450311}
-  - component: {fileID: 4483291540051243726}
+  - component: {fileID: -7637437972556741108}
   m_Layer: 6
   m_Name: Good3
   m_TagString: Good
@@ -115,7 +115,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.24241088, y: 0.9589979, z: 0.24241088}
   m_Center: {x: 0, y: -0.000000059604645, z: 0}
---- !u!114 &4483291540051243726
+--- !u!114 &-7637437972556741108
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,11 +124,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6923172442952559917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6995b9a3c6c17334ab6b901c97acfc8d, type: 3}
+  m_Script: {fileID: 11500000, guid: 78ddf6b169e0f1d4baa42ed644d3b47b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minForce: 16
+  minFore: 16
   maxForce: 18
-  posY: -4
-  pointValue: 16
-  explosionParticle: {fileID: 2478549635105912040, guid: ec46c8c4a3cbc429382ee48bd9169b45, type: 3}
+  pointvalue: 22
+  explosionParticle: {fileID: 15085447402717889, guid: 743ce290c74ae49c19aa3f128322fc7e, type: 3}
