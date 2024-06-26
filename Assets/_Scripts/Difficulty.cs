@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DifficultyButton : MonoBehaviour
+public class Difficulty : MonoBehaviour
 {
+
     private Button _button;
 
     private GameManager _gameManager;
@@ -29,4 +30,5 @@ public class DifficultyButton : MonoBehaviour
     {
         _gameManager.StartGame(difficulty);
     }
+    
 }

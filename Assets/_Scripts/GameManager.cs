@@ -5,23 +5,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-
 public class GameManager : MonoBehaviour
 {
-    
     public enum GameState
     {
-        loading,
+        loadin,
         paused,
         inGame,
         gameOver
-        
     }
 
     public GameState gameState;
 
     public List<GameObject> targetPrefabs;
-
 
     public float spawnRate = 1;
 
@@ -34,28 +30,25 @@ public class GameManager : MonoBehaviour
         set
         {
             _score = Mathf.Max(value, 0);
-            
         }
-
         get
         {
             return _score;
         }
-        
     }
 
-    public TextMeshProUGUI gameOverText;
+
+
+    public TextMeshProUGUI gameOvertext;
     public Button restarButton;
 
     public GameObject titleScreen;
 
-
     private const string MAX_SCORE = "MAX_SCORE";
 
-
     private int numberOfLives = 4;
+
     public List<GameObject> lives;
-    
     
     // Start is called before the first frame update
     void Start()
@@ -76,32 +69,25 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(spawnRate);
             int index = Random.Range(0, targetPrefabs.Count);
             Instantiate(targetPrefabs[index]);
-
-            
         }
-        
-        
-        
-        
+      
     }
 
 
-    public void UpdateScore(int scoreAdd)
+    public void UpdateScore(int scoreToAdd)
     {
-        score += scoreAdd;
+        score += scoreToAdd;
         scoreText.text = "Score \n " + score;
-
-
     }
 
 
-    public void SetMaxScore()
+
+    private void SetMaxScore()
     {
         int maxScore = PlayerPrefs.GetInt(MAX_SCORE, 0);
         if (score > maxScore)
         {
             PlayerPrefs.SetInt(MAX_SCORE, score);
-            
         }
     }
 
@@ -116,6 +102,7 @@ public class GameManager : MonoBehaviour
             tempColor.a = 0.3f;
             heartImage.color = tempColor;
 
+
         }
 
         if (numberOfLives <= 0)
@@ -123,15 +110,13 @@ public class GameManager : MonoBehaviour
             SetMaxScore();
 
             gameState = GameState.gameOver;
-            
-            gameOverText.gameObject.SetActive(true);
+            gameOvertext.gameObject.SetActive(true);
             restarButton.gameObject.SetActive(true);
-            
         }
         
     }
 
-    public void RestarGame()
+    public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -149,18 +134,20 @@ public class GameManager : MonoBehaviour
             lives[i].SetActive(true);
         }
 
+
         StartCoroutine(SpawnTarget());
 
         score = 0;
         UpdateScore(0);
-        gameOverText.gameObject.SetActive(false);
-
+        gameOvertext.gameObject.SetActive(false);
     }
-
 
     public void ShowMaxScore()
     {
-        int maxScore = PlayerPrefs.GetInt(MAX_SCORE, 0);
-        scoreText.text = "Max Score: \n " + maxScore;
+        int maxCore = PlayerPrefs.GetInt(MAX_SCORE, 0);
+        scoreText.text = "Max Score: \n " + maxCore;
     }
+    
+    
+    
 }
