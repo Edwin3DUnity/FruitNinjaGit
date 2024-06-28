@@ -24,7 +24,7 @@ public class Difficulty : MonoBehaviour
         
     }
 
-    private void SetDifficulty()
+    void SetDifficulty()
     {
         _gameManager.StartGame(difficulty);
     }

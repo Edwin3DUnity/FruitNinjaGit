@@ -2,39 +2,38 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class Targets : MonoBehaviour
+public class Target : MonoBehaviour
 {
-
-
     private Rigidbody _rigidbody;
 
     [SerializeField] private float minForce = 16;
     [SerializeField] private float maxForce = 18;
 
-    [SerializeField] private float maxTorque = 10;
+    [SerializeField] private float maxTorque = 15;
+
 
     [SerializeField] private float posX = 4;
     [SerializeField] private float posY = -4;
 
-    public ParticleSystem explotion;
+    public ParticleSystem explosion;
+
+
+    public int pointValue;
 
     private GameManager _gameManager;
-
-    public int pointvalue;
+    
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _rigidbody.AddForce(RandomForce(),ForceMode.Impulse);
-        _rigidbody.AddTorque(RandomTorque(),RandomTorque(),RandomTorque(), ForceMode.Impulse);
+        _rigidbody.AddForce(RandomForce(), ForceMode.Impulse);
+        _rigidbody.AddTorque(RandomTorque(),RandomTorque(), RandomTorque());
 
-        transform.position = RandomPosx();
-
+        transform.position = RandomPos();
         _gameManager = FindObjectOfType<GameManager>();
-        
-
     }
 
     // Update is called once per frame
@@ -43,9 +42,11 @@ public class Targets : MonoBehaviour
         
     }
 
+
     private Vector3 RandomForce()
     {
         return Vector3.up * Random.Range(minForce, maxForce);
+
     }
 
 
@@ -54,7 +55,7 @@ public class Targets : MonoBehaviour
         return Random.Range(-maxTorque, maxTorque);
     }
 
-    private Vector3 RandomPosx()
+    private Vector3 RandomPos()
     {
         return new Vector3(Random.Range(-posX, posX), posY);
     }
@@ -62,9 +63,15 @@ public class Targets : MonoBehaviour
 
     private void OnMouseOver()
     {
-        Destroy(gameObject);
-        Instantiate(explotion, transform.position, explotion.transform.rotation);
-        _gameManager.UpdateScore(pointvalue);
+        if (_gameManager._gameState == GameManager.GameState.inGame)
+        {
+            Destroy(gameObject);
+            Instantiate(explosion, transform.position, explosion.transform.rotation);
+            _gameManager.UpdateScore(pointValue);
+        }
+     
+
+
     }
 
 

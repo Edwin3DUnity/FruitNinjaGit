@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 927229242183481051}
   - component: {fileID: 6693094174898999382}
   - component: {fileID: -3251917472888949425}
-  - component: {fileID: -6433724950263907247}
+  - component: {fileID: -4906949233036959409}
   m_Layer: 6
   m_Name: Bad1
   m_TagString: Bad
@@ -255,7 +255,7 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &-6433724950263907247
+--- !u!114 &-4906949233036959409
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -264,7 +264,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1172853567109416377}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e05892cc4a0457841a58e9c23e68ebd0, type: 3}
+  m_Script: {fileID: 11500000, guid: 6113c7f2118159b45aaca5628796e9f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minForce: 16
@@ -272,5 +272,5 @@ MonoBehaviour:
   maxTorque: 10
   posX: 4
   posY: -4
-  explotion: {fileID: 4758139293545943008, guid: c7ad2532a6eeb40b59033c75e71fa054, type: 3}
-  pointvalue: -30
+  explosion: {fileID: 4758139293545943008, guid: c7ad2532a6eeb40b59033c75e71fa054, type: 3}
+  pointValue: -30
