@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1452516735332804338}
   - component: {fileID: 8531437771264076149}
   - component: {fileID: -1289215166466898745}
-  - component: {fileID: 8556624298575317087}
+  - component: {fileID: -3503449183187358703}
   m_Layer: 6
   m_Name: Food_Fish_Cooked
   m_TagString: Untagged
@@ -115,7 +115,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.26173592, y: 0.13675982, z: 0.4304055}
   m_Center: {x: 0, y: 0.111486286, z: 0.00342983}
---- !u!114 &8556624298575317087
+--- !u!114 &-3503449183187358703
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1452516735335038540}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6113c7f2118159b45aaca5628796e9f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 83a4e46d2c80bf04db6f062ed7f7bb42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minForce: 16
@@ -132,5 +132,5 @@ MonoBehaviour:
   maxTorque: 10
   posX: 4
   posY: -4
+  pointvalue: 18
   explosion: {fileID: 15085447402717889, guid: 743ce290c74ae49c19aa3f128322fc7e, type: 3}
-  pointValue: 18

@@ -8,23 +8,21 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-
-    public List<GameObject> targets;
-
-    public float spawnRate = 1;
     
     public enum GameState
     {
         loading,
-        inGame, 
+        inGame,
         paused,
-        gameOver
+        GameOver
         
     }
 
     public GameState _gameState;
 
-    public TextMeshProUGUI scoreText;
+    public List<GameObject> targets;
+
+    public float spawnRate = 1;
 
     private int _score;
 
@@ -32,14 +30,18 @@ public class GameManager : MonoBehaviour
     {
         set
         {
-            _score = Mathf.Max(value, 0);
+          _score =  Mathf.Max(value, 0);
+          
         }
+
         get
         {
             return _score;
         }
+        
     }
 
+    public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameOverText;
     public Button restartButton;
 
@@ -47,15 +49,16 @@ public class GameManager : MonoBehaviour
 
     private const string MAX_SCORE = "MAX_SCORE";
 
-    private int numberOfLives = 4;
+    private int numberlives = 4;
+
     public List<GameObject> lives;
-    
     
     
     // Start is called before the first frame update
     void Start()
     {
        ShowMaxScore();
+
     }
 
     // Update is called once per frame
@@ -65,68 +68,63 @@ public class GameManager : MonoBehaviour
     }
 
 
-    IEnumerator TargetGeneration()
+    IEnumerator SpawnTargets()
     {
-        while (true)
+        while (_gameState == GameState.inGame)
         {
             yield return new WaitForSeconds(spawnRate);
             int index = Random.Range(0, targets.Count);
             Instantiate(targets[index]);
-        }
-        
-        
 
+        }
     }
 
-    public void UpdateScore(int scoreToAdd)
+    public void UpdateScore(int pointToAdd)
     {
-        score = scoreToAdd;
-        scoreText.text = "Score \n " + score;
+        score = pointToAdd;
+        scoreText.text = "Score: \n " + score;
 
     }
 
     private void SetMaxScore()
     {
         int maxScore = PlayerPrefs.GetInt(MAX_SCORE, 0);
-
         if (score > maxScore)
         {
             PlayerPrefs.SetInt(MAX_SCORE, score);
         }
-        
-        
     }
-
 
     public void GameOver()
     {
-        numberOfLives--;
-        if (numberOfLives >= 0)
+        numberlives--;
+        if (numberlives >= 0)
         {
-            Image heartImage = lives[numberOfLives].GetComponent<Image>();
+            Image heartImage = lives[numberlives].GetComponent<Image>();
             var tempColor = heartImage.color;
             tempColor.a = 0.3f;
             heartImage.color = tempColor;
-            
-
         }
 
-        if (numberOfLives <= 0)
+        if (numberlives <= 0)
         {
             SetMaxScore();
 
-            _gameState = GameState.gameOver;
+            _gameState = GameState.GameOver;
             gameOverText.gameObject.SetActive(true);
             restartButton.gameObject.SetActive(true);
-            
         }
+
+
+
+
     }
 
-    public void RestarGame()
+    public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        
     }
+
 
     public void StartGame(int difficulty)
     {
@@ -134,22 +132,20 @@ public class GameManager : MonoBehaviour
         titleScreen.gameObject.SetActive(false);
 
         spawnRate /= difficulty;
-        numberOfLives -= difficulty;
-        
-        for(int i = 0; i < numberOfLives; i ++)
+        numberlives -= difficulty;
+
+        for (int i = 0; i < numberlives; i++)
         {
             lives[i].SetActive(true);
-            
         }
 
-        StartCoroutine(TargetGeneration());
+        StartCoroutine(SpawnTargets());
 
         score = 0;
         UpdateScore(0);
         gameOverText.gameObject.SetActive(false);
 
     }
-
 
     public void ShowMaxScore()
     {

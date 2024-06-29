@@ -2,37 +2,37 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class Target : MonoBehaviour
+public class Targets : MonoBehaviour
 {
     private Rigidbody _rigidbody;
 
     [SerializeField] private float minForce = 16;
     [SerializeField] private float maxForce = 18;
-
-    [SerializeField] private float maxTorque = 15;
-
+    [SerializeField] private float maxTorque = 10;
 
     [SerializeField] private float posX = 4;
     [SerializeField] private float posY = -4;
 
+
+
+    public int pointvalue;
+
     public ParticleSystem explosion;
 
 
-    public int pointValue;
-
     private GameManager _gameManager;
-    
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.AddForce(RandomForce(), ForceMode.Impulse);
-        _rigidbody.AddTorque(RandomTorque(),RandomTorque(), RandomTorque());
+        _rigidbody.AddTorque(RandomTorque(),RandomTorque(),RandomTorque(), ForceMode.Impulse);
+
 
         transform.position = RandomPos();
+
         _gameManager = FindObjectOfType<GameManager>();
     }
 
@@ -42,18 +42,18 @@ public class Target : MonoBehaviour
         
     }
 
-
     private Vector3 RandomForce()
     {
-        return Vector3.up * Random.Range(minForce, maxForce);
+
+        return Vector3.up * Random.Range(minForce, maxForce); 
 
     }
-
 
     private float RandomTorque()
     {
         return Random.Range(-maxTorque, maxTorque);
     }
+
 
     private Vector3 RandomPos()
     {
@@ -66,12 +66,10 @@ public class Target : MonoBehaviour
         if (_gameManager._gameState == GameManager.GameState.inGame)
         {
             Destroy(gameObject);
-            Instantiate(explosion, transform.position, explosion.transform.rotation);
-            _gameManager.UpdateScore(pointValue);
+            Instantiate(explosion, transform.position, explosion.transform.rotation);    
+            _gameManager.UpdateScore(pointvalue);
         }
-     
-
-
+        
     }
 
 
@@ -82,7 +80,7 @@ public class Target : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (gameObject.CompareTag("Good"))
+        if (other.gameObject.CompareTag("Good"))
         {
             _gameManager.GameOver();
         }

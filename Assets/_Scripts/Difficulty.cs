@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Difficulty : MonoBehaviour
 {
     private Button _button;
+
     private GameManager _gameManager;
 
     [Range(1, 3)] public int difficulty;
@@ -16,6 +17,7 @@ public class Difficulty : MonoBehaviour
         _button = GetComponent<Button>();
         _button.onClick.AddListener(SetDifficulty);
         _gameManager = FindObjectOfType<GameManager>();
+
     }
 
     // Update is called once per frame
@@ -23,6 +25,7 @@ public class Difficulty : MonoBehaviour
     {
         
     }
+
 
     void SetDifficulty()
     {
