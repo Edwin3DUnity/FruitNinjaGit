@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class Difficulty : MonoBehaviour
 {
+
     private Button _button;
 
     private GameManager _gameManager;
 
     [Range(1, 3)] public int difficulty;
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -26,9 +26,9 @@ public class Difficulty : MonoBehaviour
         
     }
 
-
     void SetDifficulty()
     {
         _gameManager.StartGame(difficulty);
     }
+    
 }
