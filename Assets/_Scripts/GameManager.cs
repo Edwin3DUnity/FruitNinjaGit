@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         numberOfLives--;
+        Debug.Log("vida menos" + numberOfLives);
         if (numberOfLives >= 0)
         {
             Image heartImage = lives[numberOfLives].GetComponent<Image>();

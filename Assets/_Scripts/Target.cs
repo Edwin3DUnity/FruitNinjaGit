@@ -78,8 +78,9 @@ public class Target : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if(other.gameObject.CompareTag("Good"))
+        if(gameObject.CompareTag("Good"))
         {
+            
             _gameManager.GameOver();
             
         }
